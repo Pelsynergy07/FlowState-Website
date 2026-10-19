@@ -5,19 +5,28 @@
   var root = document.documentElement;
   root.classList.add("js");
 
-  // Which computer is this? Picks the primary download button and which
-  // shortcuts the page shows ("win", "mac" or "other").
+  // Which computer is this? Only decides which shortcuts the page shows
+  // ("win", "mac" or "other"); both download buttons always look the same.
   var ua = navigator.userAgent || "";
   var isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(ua);
   var os = isMobile ? "other" : /Macintosh|Mac OS X/i.test(ua) ? "mac" : /Windows/i.test(ua) ? "win" : "other";
   root.dataset.os = os;
-  Array.prototype.forEach.call(document.querySelectorAll(".dl-buttons"), function (group) {
-    var buttons = Array.prototype.slice.call(group.querySelectorAll(".js-download"));
-    var mine = buttons.filter(function (b) { return b.dataset.os === os; })[0];
-    if (!mine) return;
-    group.insertBefore(mine, group.firstChild);
-    buttons.forEach(function (b) { if (b !== mine) b.classList.add("is-secondary"); });
-  });
+
+  // Menu panel on phones and tablets: section links and both downloads.
+  var navEl = document.querySelector(".nav");
+  var menuToggle = document.getElementById("menu-toggle");
+  function setMenu(open) {
+    navEl.classList.toggle("is-open", open);
+    menuToggle.setAttribute("aria-expanded", String(open));
+    menuToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    menuToggle.firstElementChild.className = "ph " + (open ? "ph-x" : "ph-list");
+  }
+  if (navEl && menuToggle) {
+    menuToggle.addEventListener("click", function () { setMenu(!navEl.classList.contains("is-open")); });
+    navEl.querySelectorAll(".nav-menu a").forEach(function (a) { a.addEventListener("click", function () { setMenu(false); }); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") setMenu(false); });
+    window.matchMedia("(min-width: 1180px)").addEventListener("change", function () { setMenu(false); });
+  }
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   function storageGet(key) {
@@ -257,7 +266,7 @@
   }
 
   // Install steps: the screenshot on the right follows the step in view.
-  var steps = Array.prototype.slice.call(document.querySelectorAll(".install-steps li"));
+  var steps = Array.prototype.slice.call(document.querySelectorAll(".install-steps > ol > li"));
   var shots = Array.prototype.slice.call(document.querySelectorAll(".install-shots .shot"));
   function activate(index) {
     steps.forEach(function (s) { s.classList.toggle("is-active", s.dataset.shot === index); });
@@ -275,7 +284,7 @@
 
   // Reveal sections as they arrive.
   if ("IntersectionObserver" in window && !reduceMotion) {
-    var revealTargets = document.querySelectorAll(".how .wrap > *, .timeline li, .point-grid > *, .privacy .wrap > *, .install-steps, .faq-grid > *, .download-inner > *");
+    var revealTargets = document.querySelectorAll(".how .wrap > *, .timeline li, .point-grid > *, .privacy .wrap > *, .install-steps, .faq-grid > *, .download .wrap > *");
     var revealObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
@@ -303,11 +312,10 @@
     }
     Array.prototype.forEach.call(document.querySelectorAll(".js-version"), function (el) { el.textContent = "Version " + version; });
     if (size) {
-      Array.prototype.forEach.call(document.querySelectorAll(".js-size"), function (el) { el.textContent = size; });
-      Array.prototype.forEach.call(document.querySelectorAll(".js-size-plain"), function (el) { el.textContent = size + " installer"; });
+      Array.prototype.forEach.call(document.querySelectorAll(".js-size-win"), function (el) { el.textContent = size; });
     }
   }
-  var cached = storageGet("flowstate-release-v2");
+  var cached = storageGet("flowstate-release-v3");
   if (cached) {
     try { showRelease(JSON.parse(cached)); } catch (e) { /* ignore */ }
   } else if (window.fetch) {
@@ -320,7 +328,7 @@
           return asset ? asset.size : 0;
         }
         var info = { tag: data.tag_name, bytes: sizeOf("FlowStateSetup.exe"), macBytes: sizeOf("FlowState-macOS.dmg") };
-        storageSet("flowstate-release-v2", JSON.stringify(info));
+        storageSet("flowstate-release-v3", JSON.stringify(info));
         showRelease(info);
       })
       .catch(function () { /* keep the static fallback text */ });

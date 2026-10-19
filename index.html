@@ -39,16 +39,32 @@
         </span>
         FlowState
       </a>
-      <nav class="nav-links" aria-label="Sections">
-        <a href="#how-it-works">How it works</a>
-        <a href="#privacy">Privacy</a>
-        <a href="#install">Install</a>
-        <a href="#faq">FAQ</a>
+      <nav class="nav-menu" id="nav-menu" aria-label="Sections">
+        <div class="nav-links">
+          <a href="#how-it-works">How it works</a>
+          <a href="#privacy">Privacy</a>
+          <a href="#install">Install</a>
+          <a href="#faq">FAQ</a>
+        </div>
+        <div class="nav-dl nav-dl-menu" aria-label="Download">
+          <span class="dl-label">Download</span>
+          <div class="dl-pair">
+            <a class="btn btn-primary btn-sm" href="https://github.com/Pelsynergy07/FlowState/releases/latest/download/FlowStateSetup.exe" aria-label="Download FlowState for Windows"><i class="ph ph-windows-logo" aria-hidden="true"></i> Windows</a>
+            <a class="btn btn-primary btn-sm" href="https://github.com/Pelsynergy07/FlowState/releases/latest/download/FlowState-macOS.dmg" aria-label="Download FlowState for Mac"><i class="ph ph-apple-logo" aria-hidden="true"></i> Mac</a>
+          </div>
+        </div>
       </nav>
-      <button class="theme-toggle" type="button" id="theme-toggle" aria-label="Switch to dark mode"><i class="ph ph-moon" aria-hidden="true"></i></button>
-      <a class="btn btn-primary btn-sm" href="#download">
-        <i class="ph ph-download-simple" aria-hidden="true"></i> Download
-      </a>
+      <div class="nav-actions">
+        <div class="nav-dl nav-dl-bar" aria-label="Download">
+          <span class="dl-label">Download</span>
+          <div class="dl-pair">
+            <a class="btn btn-primary btn-sm" href="https://github.com/Pelsynergy07/FlowState/releases/latest/download/FlowStateSetup.exe" aria-label="Download FlowState for Windows"><i class="ph ph-windows-logo" aria-hidden="true"></i> Windows</a>
+            <a class="btn btn-primary btn-sm" href="https://github.com/Pelsynergy07/FlowState/releases/latest/download/FlowState-macOS.dmg" aria-label="Download FlowState for Mac"><i class="ph ph-apple-logo" aria-hidden="true"></i> Mac</a>
+          </div>
+        </div>
+        <button class="icon-btn theme-toggle" type="button" id="theme-toggle" aria-label="Switch to dark mode"><i class="ph ph-moon" aria-hidden="true"></i></button>
+        <button class="icon-btn menu-toggle" type="button" id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu"><i class="ph ph-list" aria-hidden="true"></i></button>
+      </div>
     </div>
   </header>
 
@@ -59,15 +75,17 @@
         <div class="hero-copy">
           <h1>Talk, and clean <span class="keep">text appears</span> <em class="keep">wherever you type.</em></h1>
           <p class="lead">Hold a shortcut, speak, let go. FlowState writes what you said, punctuated and laid out, in about two seconds.</p>
-          <div class="cta-row">
-            <div class="dl-buttons">
-              <a class="btn btn-primary btn-lg js-download" data-os="win" href="https://github.com/Pelsynergy07/FlowState/releases/latest/download/FlowStateSetup.exe">
-                <i class="ph ph-windows-logo" aria-hidden="true"></i> Download for Windows
+          <div class="cta">
+            <p class="dl-label">Download</p>
+            <div class="dl-pair">
+              <a class="btn btn-primary btn-md js-download" data-os="win" href="https://github.com/Pelsynergy07/FlowState/releases/latest/download/FlowStateSetup.exe" aria-label="Download FlowState for Windows">
+                <i class="ph ph-windows-logo" aria-hidden="true"></i> Windows
               </a>
-              <a class="btn btn-primary btn-lg js-download" data-os="mac" href="https://github.com/Pelsynergy07/FlowState/releases/latest/download/FlowState-macOS.dmg">
-                <i class="ph ph-apple-logo" aria-hidden="true"></i> Download for Mac
+              <a class="btn btn-primary btn-md js-download" data-os="mac" href="https://github.com/Pelsynergy07/FlowState/releases/latest/download/FlowState-macOS.dmg" aria-label="Download FlowState for Mac">
+                <i class="ph ph-apple-logo" aria-hidden="true"></i> Mac
               </a>
             </div>
+            <p class="cta-meta">Free and open source. Windows 10 and 11, and Macs with Apple silicon.</p>
             <a class="link-arrow" href="#how-it-works">See how it works <i class="ph ph-arrow-down" aria-hidden="true"></i></a>
           </div>
         </div>
@@ -183,10 +201,11 @@
         <div class="install-steps">
           <p class="eyebrow">Install</p>
           <h2>Running in about ten minutes.</h2>
+          <h3 class="install-os"><i class="ph ph-windows-logo" aria-hidden="true"></i> On Windows</h3>
           <ol>
             <li data-shot="0">
               <h3>Download the installer</h3>
-              <p><span class="js-size">About 1 GB</span>. One file, <code>FlowStateSetup.exe</code>, straight from GitHub.</p>
+              <p><span class="js-size-win">About 1 GB</span>. One file, <code>FlowStateSetup.exe</code>, straight from GitHub.</p>
             </li>
             <li data-shot="1">
               <h3>If Windows warns you, choose Run anyway</h3>
@@ -215,7 +234,7 @@
           <figure class="shot is-active" data-shot="0">
             <div class="shot-file">
               <i class="ph ph-file-arrow-down"></i>
-              <div><strong>FlowStateSetup.exe</strong><span class="js-size">About 1 GB</span></div>
+              <div><strong>FlowStateSetup.exe</strong><span class="js-size-win">About 1 GB</span></div>
             </div>
           </figure>
           <figure class="shot" data-shot="1">
@@ -278,32 +297,36 @@
 
     <!-- Download -->
     <section class="download" id="download">
-      <div class="wrap download-inner">
-        <h2>Try it on your computer.</h2>
-        <div class="dl-buttons">
-          <a class="btn btn-primary btn-xl js-download" data-os="win" href="https://github.com/Pelsynergy07/FlowState/releases/latest/download/FlowStateSetup.exe">
-            <i class="ph ph-windows-logo" aria-hidden="true"></i> Download for Windows
-          </a>
-          <a class="btn btn-primary btn-xl js-download" data-os="mac" href="https://github.com/Pelsynergy07/FlowState/releases/latest/download/FlowState-macOS.dmg">
-            <i class="ph ph-apple-logo" aria-hidden="true"></i> Download for Mac
-          </a>
+      <div class="wrap">
+        <div class="download-head">
+          <h2>Try it on your computer.</h2>
+          <p class="section-lead"><span class="js-version">Latest version</span>. Free, open source, no account.</p>
         </div>
-        <p class="download-meta"><span class="js-version">Latest version</span>. Windows 10 or 11, 64-bit (<span class="js-size-plain">about 1 GB</span>). Mac with Apple silicon, macOS 14 or later (<span class="js-size-mac">about 0.4 GB</span>).</p>
+        <div class="dl-cards">
+          <article class="dl-card" data-os="win">
+            <div class="dl-card-head"><i class="ph ph-windows-logo" aria-hidden="true"></i><h3>Windows</h3></div>
+            <p class="dl-req">Windows 10 or 11, 64-bit</p>
+            <ul class="dl-facts">
+              <li><span>Installer</span><strong class="js-size-win">about 1 GB</strong></li>
+              <li><span>With an NVIDIA graphics card</span><strong>text in ~2 s</strong></li>
+              <li><span>Without one</span><strong>a few seconds longer</strong></li>
+              <li><span>One-time model download</span><strong>1.3–3.1 GB</strong></li>
+            </ul>
+            <a class="btn btn-primary btn-md" href="https://github.com/Pelsynergy07/FlowState/releases/latest/download/FlowStateSetup.exe"><i class="ph ph-download-simple" aria-hidden="true"></i> Download for Windows</a>
+          </article>
+          <article class="dl-card" data-os="mac">
+            <div class="dl-card-head"><i class="ph ph-apple-logo" aria-hidden="true"></i><h3>Mac</h3></div>
+            <p class="dl-req">Apple silicon (M1 or newer), macOS 14 or later</p>
+            <ul class="dl-facts">
+              <li><span>Disk image</span><strong class="js-size-mac">about 0.4 GB</strong></li>
+              <li><span>Speech on the Neural Engine</span><strong>text in ~1 s</strong></li>
+              <li><span>Lives in</span><strong>the menu bar</strong></li>
+              <li><span>One-time model download</span><strong>1.6 GB</strong></li>
+            </ul>
+            <a class="btn btn-primary btn-md" href="https://github.com/Pelsynergy07/FlowState/releases/latest/download/FlowState-macOS.dmg"><i class="ph ph-download-simple" aria-hidden="true"></i> Download for Mac</a>
+          </article>
+        </div>
         <p class="platform-note" id="platform-note" hidden></p>
-        <dl class="reqs">
-          <div>
-            <dt>With an NVIDIA graphics card</dt>
-            <dd>Text in about 2 seconds. One-time model download of about 3.1 GB.</dd>
-          </div>
-          <div>
-            <dt>On any other Windows PC</dt>
-            <dd>A few seconds longer. One-time model download of about 1.3 GB.</dd>
-          </div>
-          <div>
-            <dt>On a Mac with Apple silicon</dt>
-            <dd>Text in about a second. One-time model download of about 1.6 GB.</dd>
-          </div>
-        </dl>
         <p class="download-links">
           <a href="https://github.com/Pelsynergy07/FlowState/releases/latest">Release notes</a>
           <a href="https://github.com/Pelsynergy07/FlowState">Source code</a>
