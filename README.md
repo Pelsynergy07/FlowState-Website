@@ -11,10 +11,16 @@ JS, no build step.
   the visitor's own download button first and shows their shortcuts.
 - `styles/site.css`, `assets/`: styles, fonts and images.
 
-Deploy from this folder with the Vercel CLI (linked to the existing
-project once):
+The app itself lives in [Pelsynergy07/FlowState](https://github.com/Pelsynergy07/FlowState).
+
+## Deploying
+
+Best: connect this repository to the `runflowstate` project in Vercel
+(Project → Settings → Git), so every push to `main` publishes the site.
+
+Or deploy by hand with the Vercel CLI:
 
 ```bash
-npx vercel link
+npx vercel link --project runflowstate
 npx vercel deploy --prod
 ```
