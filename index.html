@@ -224,7 +224,7 @@
             <h3><i class="ph ph-apple-logo" aria-hidden="true"></i> On a Mac</h3>
             <ol>
               <li>Download <code>FlowState-macOS.dmg</code> and drag <strong>FlowState</strong> into <strong>Applications</strong>.</li>
-              <li>Open it. The first time, macOS stops it because it isn't notarized yet: go to <strong>System Settings → Privacy &amp; Security</strong> and click <strong>Open Anyway</strong>.</li>
+              <li>Open it from Applications. macOS stops it the first time because it isn't notarized by Apple yet: click <strong>Done</strong>, go to <strong>System Settings → Privacy &amp; Security</strong> and click <strong>Open Anyway</strong>. If that button doesn't appear, run this once in Terminal, then open FlowState again: <code>xattr -dr com.apple.quarantine /Applications/FlowState.app</code></li>
               <li>Setup asks for the microphone, Accessibility and Input Monitoring. Switch each on and FlowState comes back by itself.</li>
               <li>FlowState lives in the menu bar. Hold <kbd class="kbd-inline">Right ⌥ Option</kbd> in any app and start talking.</li>
             </ol>
@@ -285,7 +285,7 @@
           </details>
           <details>
             <summary>Why do I see a warning when I install it?</summary>
-            <p>FlowState isn't code-signed yet. On Windows, SmartScreen doesn't recognise the installer: click More info, then Run anyway. On a Mac, open System Settings, then Privacy &amp; Security, and click Open Anyway next to FlowState. The code and the builds are public on GitHub, and every release lists SHA-256 checksums.</p>
+            <p>FlowState isn't code-signed yet. On Windows, SmartScreen doesn't recognise the installer: click More info, then Run anyway. On a Mac, macOS says it "could not verify" FlowState: click Done, open System Settings, then Privacy &amp; Security, and click Open Anyway next to FlowState. If that doesn't appear, run <code>xattr -dr com.apple.quarantine /Applications/FlowState.app</code> in Terminal once. The code and the builds are public on GitHub, and every release lists SHA-256 checksums.</p>
           </details>
           <details>
             <summary>How do I update or uninstall it?</summary>
