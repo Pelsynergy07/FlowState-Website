@@ -334,6 +334,30 @@
       .catch(function () { /* keep the static fallback text */ });
   }
 
+  // Mac downloads: the download starts, and a panel explains how to open
+  // an app macOS can't verify yet (until FlowState is notarized).
+  var macHelp = document.getElementById("mac-help");
+  if (macHelp && typeof macHelp.showModal === "function") {
+    Array.prototype.forEach.call(document.querySelectorAll('a[href$="FlowState-macOS.dmg"]'), function (link) {
+      link.addEventListener("click", function () {
+        setTimeout(function () { if (!macHelp.open) macHelp.showModal(); }, 300);
+      });
+    });
+    Array.prototype.forEach.call(macHelp.querySelectorAll("[data-close]"), function (b) {
+      b.addEventListener("click", function () { macHelp.close(); });
+    });
+    macHelp.addEventListener("click", function (e) { if (e.target === macHelp) macHelp.close(); });
+    var copyBtn = document.getElementById("copy-mac-cmd");
+    if (copyBtn) {
+      copyBtn.addEventListener("click", function () {
+        var text = document.getElementById("mac-cmd").textContent;
+        var done = function (label) { copyBtn.textContent = label; setTimeout(function () { copyBtn.textContent = "Copy"; }, 2000); };
+        if (navigator.clipboard) navigator.clipboard.writeText(text).then(function () { done("Copied"); }, function () { done("Select and copy"); });
+        else done("Select and copy");
+      });
+    }
+  }
+
   // Phones and other systems can't run FlowState; say so next to the final button.
   var note = document.getElementById("platform-note");
   if (note) {
